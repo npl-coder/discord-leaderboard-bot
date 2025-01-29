@@ -20,7 +20,7 @@ def get_top_k_place(place: str, k: int):
 
 
 def add_new_user(name, username, province, district, school):
-    new_user = [name, username, province, district, school, 0]
+    new_user = [name, username, province, district, school, 0] # Score is 0 for new user
     worksheet.append_row(new_user)
 
 
