@@ -1,42 +1,81 @@
-# Google Sheets Data Processor
+# NPL Coder Leaderboard Bot
 
-This project provides functionality to interact with a Google Sheet, perform data analysis, and update scores.
+A Discord bot that manages a leaderboard system integrated with Google Sheets, allowing tracking of user scores across different provinces, districts, and schools.
 
 ## Features
 
-- **Get Top Individuals:** Retrieve the top K individuals based on their score.
-- **Get Top Places:** Retrieve the top K places based on the average score.
-- **Add New User:** Add new users to the Google Sheet.
-- **Increase Score:** Increase the score of a specific user.
+- View top performers by score
+- View top performing provinces, districts, or schools
+- Admin-only commands for managing users and scores
+- Google Sheets integration for persistent data storage
+- Rich Discord embeds for beautiful data presentation
+
+## Commands
+
+### Public Commands
+- `npl help` - Shows all available commands
+- `npl top <k>` - Shows the top k users based on scores
+- `npl top_place <place> <k>` - Shows top k places based on average scores
+  - `place` can be: province, district, or school
+  - Example: `npl top_place province 3`
+
+### Admin-Only Commands
+These commands require Discord administrator permissions:
+- `npl add_user <name> <username> <province> <district> <school>` - Adds a new user to the leaderboard
+- `npl increase_score <username> <points>` - Increases a user's score
 
 ## Setup
 
-1.  **Clone the repository**
-2.  **Create a .env file** in the root directory and add your Google Sheet ID:
-    ```
-    SHEET_ID=your_google_sheet_id
-    ```
-3.  **Download your Google Service Account credentials** as `credentials.json` and place it in the root directory. This file is necessary for authenticating with the Google Sheets API.
-4.  **Install the necessary packages:**
-    ```
-    pip install gspread pandas python-dotenv google-auth-oauthlib google-auth-httplib2
-    ```
+1. Create a Discord Application and Bot
+   - Go to [Discord Developer Portal](https://discord.com/developers/applications)
+   - Create a new application
+   - Add a bot to your application
+   - Copy the bot token
 
-## Usage
+2. Set up Google Sheets API
+   - Go to [Google Cloud Console](https://console.cloud.google.com)
+   - Create a new project
+   - Enable Google Sheets API
+   - Create service account credentials
+   - Download the credentials as `credentials.json`
+   - Create a Google Sheet and share it with the service account email
 
-Refer to the `sheet/sheet_operations.py` file for the functions and their usage. This file contains the core logic for interacting with Google Sheets, including reading data, adding new users, and updating scores.
+3. Environment Setup
+   - Create a `.env` file in the project root with:
+     ```
+     DISCORD_TOKEN=your_discord_bot_token
+     SHEET_ID=your_google_sheet_id
+     ```
 
-## File Structure
+4. Install Dependencies
+   ```bash
+   pip install discord.py python-dotenv google-oauth2-credentials gspread pandas
+   ```
 
--   `.env`: Contains environment variables, specifically the Google Sheet ID.
--   `credentials.json`: Contains Google Service Account credentials for authenticating with the Google Sheets API.
--   `sheet/config.py`: Configures the connection to Google Sheets using the provided credentials. It handles the authentication process.
--   `sheet/sheet_operations.py`: Contains functions for interacting with the Google Sheet, such as getting top individuals, top places, adding new users, and increasing scores.
+5. Google Sheet Structure
+   The sheet should have the following columns:
+   - Name
+   - Discord Username
+   - Province
+   - District
+   - School
+   - Score
 
-## Google API Setup
+## Running the Bot
 
-1.  Go to the [Google Cloud Console](https://console.cloud.google.com/).
-2.  Create a new project or select an existing one.
-3.  Enable the **Google Sheets API** for your project.
-4.  Create a service account and download the credentials as a JSON file (`credentials.json`).
-5.  Share your Google Sheet with the service account's email address.
+1. Make sure `credentials.json` is in the project root
+2. Run the bot:
+   ```bash
+   python bot/main.py
+   ```
+
+## Permissions
+
+- Regular users can view the leaderboard and statistics
+- Only users with Discord administrator permissions can:
+  - Add new users
+  - Modify scores
+
+## Contributing
+
+Feel free to submit issues and enhancement requests!
