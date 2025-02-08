@@ -1,7 +1,8 @@
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenvconde
 from discord import Intents, Client, Message, Embed
 from bot import responses
+from keep_alive import keep_alive
 
 # Load token from .env
 load_dotenv()
