@@ -17,6 +17,9 @@ creds = Credentials.from_service_account_file(
 
 client = gspread.authorize(creds)
 sheets_id = os.getenv("SHEET_ID")
-sheet = client.open_by_key(sheets_id)
+print(sheets_id)
+sheet = client.open_by_url(sheets_id)
+worksheet_list = sheet.worksheets()
+print(worksheet_list)
 worksheet = sheet.sheet1
 
