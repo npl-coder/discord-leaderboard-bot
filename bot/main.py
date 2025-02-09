@@ -1,5 +1,5 @@
 import os
-from dotenv import load_dotenvconde
+from dotenv import load_dotenv
 from discord import Intents, Client, Message, Embed
 from bot import responses
 from keep_alive import keep_alive
