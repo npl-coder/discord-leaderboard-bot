@@ -38,7 +38,7 @@ def get_help():
     )
 
     embed.set_footer(
-        text='💡 Tip: Names or places with spaces should be enclosed in quotes. Example: "St. Xavier\'s School"'
+        text='💡 Use \'npl help\' anytime to see this help message'
     )
     return embed
 
@@ -137,17 +137,6 @@ def get_responses(user_input: str, is_admin: bool) -> str | discord.Embed:
             except (IndexError, ValueError) as e:
                 print(f"Error in top_place command: {e}")
                 return "Please use the correct format: npl top_place <province|district|school> <number>"
-
-        # Add new user command
-        elif command.startswith("add_user "):
-            if not is_admin:
-                return "❌ You need admin permissions to use this command!"
-            try:
-                _, name, username, province, district, school = command.split(" ", 5)
-                add_new_user(name, username, province, district, school)
-                return f"✅ Successfully added {name} ({username}) to the leaderboard!"
-            except ValueError:
-                return "Please use the correct format: npl add_user <name> <username> <province> <district> <school>"
 
         # Increase score command
         elif command.startswith("increase_score "):
