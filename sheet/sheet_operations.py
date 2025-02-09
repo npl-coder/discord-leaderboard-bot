@@ -50,8 +50,18 @@ def get_top_k_place(place: str, k: int):
         
     place = place.capitalize()
     if place in df.columns:
-        top_k_places = df.groupby(place)["Score"].mean().sort_values(
-            ascending=False).head(k).reset_index(name='Average Score')
+        # Convert Score to numeric
+        if 'Score' in df.columns:
+            df['Score'] = pd.to_numeric(df['Score'], errors='coerce')
+        else:
+            print(f"Warning: Score column not found. Available columns: {df.columns.tolist()}")
+            return []
+            
+        # Get all available entries, sorted by average score
+        grouped = df.groupby(place)["Score"].mean().sort_values(ascending=False)
+        # Take min(k, available_entries) entries
+        available_k = min(k, len(grouped))
+        top_k_places = grouped.head(available_k).reset_index(name='Average Score')
         list_of_dicts = top_k_places.to_dict(orient="records")
         print(f"Returning data: {list_of_dicts}")
         return list_of_dicts
