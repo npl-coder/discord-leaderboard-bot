@@ -84,6 +84,7 @@ async def on_message(message: Message) -> None:
 
 
 def main() -> None:
+    keep_alive()
     client.run(token=token)
 
 
