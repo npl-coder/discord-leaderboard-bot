@@ -29,6 +29,7 @@ async def send_message(message: Message, user_message: str) -> None:
         user_message = user_message[1:]
     try:
         response = responses.get_responses(user_message, has_admin_permission(message))
+        print(response)
         if isinstance(response, Embed):
             await message.author.send(embed=response) if is_private else await message.channel.send(embed=response)
         else:

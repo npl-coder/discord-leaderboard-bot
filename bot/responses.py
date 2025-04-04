@@ -62,6 +62,8 @@ def get_responses(user_input: str, is_admin: bool) -> str | discord.Embed:
                 k = int(command.split()[1])
                 if k <= 0:
                     return "Please provide a positive number for top k users"
+                if k>25:
+                    return "Unforunately, Discord's API doesn't allow more than 25 embeds in a single message. How sad!" + choice(["🥲","😔","😉","😑","😐","🤨","😶","🫥","🙄","😏","😣","😥","😮","🤐","😯","😪","🥱","😫","😴"])
 
                 top_users = get_top_k_individual(k)
                 if not top_users:
