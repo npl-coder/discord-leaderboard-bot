@@ -83,7 +83,7 @@ def get_responses(user_input: str, is_admin: bool) -> str | discord.Embed:
                         province = user.get("Province", "Unknown")
 
                         embed.add_field(
-                            name=f"{i}. {name} ({username})",
+                            name=f"{i}. {name}",
                             value=f"Score: {score}\nSchool: {school}\nLocation: {district}, {province}",
                             inline=False,
                         )
